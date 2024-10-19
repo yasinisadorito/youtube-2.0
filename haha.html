@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube-like Homepage</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #ff0000; color: white; position: sticky; top: 0; z-index: 1000; }
+        header .logo h1 { font-size: 24px; color: white; }
+        header .search-bar { display: flex; align-items: center; flex-grow: 1; margin-left: 50px; }
+        header .search-bar input { padding: 10px; font-size: 16px; width: 60%; border-radius: 2px; border: none; }
+        header .search-bar button { padding: 10px 12px; margin-left: 5px; background-color: #e6e6e6; border: none; cursor: pointer; border-radius: 2px; }
+        header .user-menu { display: flex; align-items: center; }
+        header .user-menu button { padding: 10px 16px; background-color: #fff; border: none; cursor: pointer; color: #333; border-radius: 2px; }
+        header .user-menu img { width: 35px; height: 35px; border-radius: 50%; margin-left: 15px; }
+        .container { display: flex; margin-top: 20px; }
+        nav { width: 200px; background-color: #fff; padding-top: 20px; }
+        nav ul { list-style: none; }
+        nav ul li { padding: 10px 20px; }
+        nav ul li a { text-decoration: none; color: #333; font-size: 16px; }
+        nav ul li a:hover { background-color: #f1f1f1; }
+        main { flex-grow: 1; padding: 20px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .video-item { background-color: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); }
+        .video-item img { width: 100%; height: auto; border-radius: 8px; }
+        .video-item h3 { margin-top: 10px; font-size: 18px; color: #000; }
+        .video-item p { font-size: 14px; color: #666; }
+        footer { text-align: center; padding: 15px; background-color: #333; color: white; margin-top: 40px; }
+        
+        /* Modal styles */
+        .modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+        .modal-content { background-color: white; padding: 20px; margin: 15% auto; width: 300px; border-radius: 5px; }
+        .modal-header { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
+        .modal-footer { margin-top: 20px; text-align: right; }
+        .modal-footer button { padding: 8px 14px; background-color: #ff0000; border: none; color: white; cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>MyTube</h1>
+        </div>
+        <div class="search-bar">
+            <form action="https://www.youtube.com/results" method="get" target="_blank">
+                <input type="text" name="search_query" placeholder="Search videos">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="user-menu">
+            <button onclick="document.getElementById('loginModal').style.display='block'">Sign In</button>
+            <img src="user-avatar.png" alt="User Avatar">
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#" onclick="alert('Go to homepage')">Home</a></li>
+                <li><a href="#" onclick="alert('Go to trending page')">Trending</a></li>
+                <li><a href="#" onclick="alert('Go to subscriptions')">Subscriptions</a></li>
+                <li><a href="#" onclick="alert('Go to library')">Library</a></li>
+                <li><a href="#" onclick="alert('Go to history')">History</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <section class="video-grid">
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=Ud1PMpuU4YU" target="_blank">
+                        <img src="https://i.ytimg.com/vi/Ud1PMpuU4YU/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - The Ultimate Smartphone Review</h3>
+                    </a>
+                    <p>2M views • 3 days ago</p>
+                </div>
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=Z4j5rJQMdOU" target="_blank">
+                        <img src="https://i.ytimg.com/vi/Z4j5rJQMdOU/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - The Best Tech Gadgets</h3>
+                    </a>
+                    <p>1.5M views • 5 days ago</p>
+                </div>
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=DbpAFQeoz2g" target="_blank">
+                        <img src="https://i.ytimg.com/vi/DbpAFQeoz2g/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - Top 10 Smartphone Tips</h3>
+                    </a>
+                    <p>900K views • 1 week ago</p>
+                </div>
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=X7QIBHhYzU4" target="_blank">
+                        <img src="https://i.ytimg.com/vi/X7QIBHhYzU4/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - Best Budget Phones</h3>
+                    </a>
+                    <p>4M views • 2 weeks ago</p>
+                </div>
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=VpZcJo4rMYI" target="_blank">
+                        <img src="https://i.ytimg.com/vi/VpZcJo4rMYI/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - New Tech Innovations 2024</h3>
+                    </a>
+                    <p>3M views • 3 days ago</p>
+                </div>
+                <div class="video-item">
+                    <a href="https://www.youtube.com/watch?v=7tVr1tldCeY" target="_blank">
+                        <img src="https://i.ytimg.com/vi/7tVr1tldCeY/maxresdefault.jpg" alt="Mrwhosetheboss Thumbnail">
+                        <h3>Mrwhosetheboss - The Future of Smartphones</h3>
+                    </a>
+                    <p>2.7M views • 4 days ago</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">Login</div>
+            <form>
+                <div class="modal-body">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" style="width: 100%; padding: 8px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="document.getElementById('loginModal').style.display='none'">Cancel</button>
+                    <button type="submit" onclick="alert('Logging in...')">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 MyTube - A YouTube-like Video Sharing Platform</p>
+    </footer>
+
+    <script>
+        // Close the modal when clicking outside
+        window.onclick = function(event) {
+            var modal = document.getElementById('loginModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
